@@ -1,0 +1,22 @@
+# Docker Compose file for starting a single Zookeeper instance.
+#
+# Usage:
+#   - Save this file as 'docker-compose.yml' in a new directory.
+#   - Open a terminal in that directory.
+#   - Run 'docker-compose up -d' to start the container in detached mode.
+#   - Run 'docker-compose down' to stop and remove the container.
+
+version: '3.8'
+
+services:
+  zookeeper:
+    # The official Confluent Zookeeper image.
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: zookeeper
+    # Maps the host port 2181 to the container's Zookeeper client port 2181.
+    ports:
+      - "2181:2181"
+    # Environment variables required for Zookeeper to run in a single-node setup.
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
